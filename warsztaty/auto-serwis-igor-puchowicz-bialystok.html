@@ -1121,33 +1121,134 @@
     .wa-btn:hover  { transform: scale(1.1); box-shadow: 0 8px 32px rgba(37,211,102,.62); }
 
     /* ════════════════════════════════════════════
-       RESPONSIVE
+       RESPONSIVE — TABLET (≤1024px)
     ════════════════════════════════════════════ */
     @media (max-width: 1024px) {
-      .srv-grid  { grid-template-columns: repeat(2,1fr); }
-      .book-inner{ gap: 40px; }
+      .srv-grid   { grid-template-columns: repeat(2,1fr); }
+      .book-inner { gap: 40px; }
+      .about-inner{ gap: 40px; }
+      .contact-grid{ gap: 36px; }
     }
+
+    /* ════════════════════════════════════════════
+       RESPONSIVE — MOBILE (≤768px)
+    ════════════════════════════════════════════ */
     @media (max-width: 768px) {
-      .nav      { display: none; }
-      .hamburger{ display: flex; }
+      /* Nav */
+      .nav       { display: none; }
+      .hamburger { display: flex; }
 
-      .hero-content { text-align: center; }
-      .hero-btns    { justify-content: center; }
+      /* Section spacing */
+      .services, .why-us, .gallery, .reviews,
+      .booking, .about, .faq, .contact { padding: 60px 16px; }
+      .trust-bar { padding: 40px 16px; }
 
-      .trust-grid { grid-template-columns: repeat(2,1fr); }
-      .srv-grid   { grid-template-columns: 1fr; }
-      .why-grid   { grid-template-columns: 1fr; }
-      .ba-grid    { grid-template-columns: 1fr; }
-      .rev-grid   { grid-template-columns: 1fr; }
-      .book-inner { grid-template-columns: 1fr; }
-      .about-inner{ grid-template-columns: 1fr; }
-      .contact-grid{ grid-template-columns: 1fr; }
-      .footer-grid { grid-template-columns: 1fr; }
-      .footer-bottom{ flex-direction: column; text-align: center; }
+      /* Hero */
+      .hero-content {
+        text-align: center;
+        padding: 100px 16px 70px;
+      }
+      .hero-btns { justify-content: center; }
+      .hero h1   { font-size: clamp(2rem, 8vw, 3rem); }
+      .hero-sub  { font-size: 1rem; margin-bottom: 2rem; }
+      .hero-badge{ font-size: .75rem; }
+
+      /* Trust bar */
+      .trust-grid { grid-template-columns: repeat(2,1fr); gap: 12px; }
+      .trust-num  { font-size: 2rem; }
+      .trust-ico  { width: 50px; height: 50px; font-size: 1.2rem; margin-bottom: 12px; }
+
+      /* Grids → single column */
+      .srv-grid    { grid-template-columns: 1fr; gap: 16px; }
+      .why-grid    { grid-template-columns: 1fr; gap: 16px; }
+      .ba-grid     { grid-template-columns: 1fr; gap: 20px; }
+      .rev-grid    { grid-template-columns: 1fr; gap: 16px; }
+      .book-inner  { grid-template-columns: 1fr; gap: 32px; }
+      .about-inner { grid-template-columns: 1fr; gap: 28px; }
+      .contact-grid{ grid-template-columns: 1fr; gap: 28px; }
+      .footer-grid { grid-template-columns: 1fr; gap: 28px; }
+
+      /* Stacking order fixes */
+      .about-inner { display: flex; flex-direction: column; }
+      .about-img-wrap { order: -1; }
+
+      /* Cards padding */
+      .srv-card  { padding: 24px 20px; }
+      .why-card  { padding: 30px 22px; }
+      .rev-card  { padding: 24px 20px; }
+      .book-form { padding: 26px 20px; }
+      .hours-box { padding: 18px 16px; }
+
+      /* Section title */
+      .section-title { font-size: clamp(1.6rem, 6vw, 2.2rem); }
+      .section-sub   { font-size: .95rem; margin-bottom: 2rem; }
+
+      /* Book info */
+      .book-info h2  { font-size: clamp(1.5rem, 5vw, 2rem); }
+      .book-feats    { gap: 10px; }
+
+      /* About */
+      .about-img-wrap { aspect-ratio: 3/2; }
+      .about-badge    { padding: 12px 16px; }
+      .about-badge strong { font-size: 1.7rem; }
+      .about-content h2 { font-size: clamp(1.5rem, 5vw, 2rem); }
+      .about-stats { grid-template-columns: repeat(3,1fr); gap: 12px; }
+      .about-stat strong { font-size: 1.5rem; }
+
+      /* Contact */
+      .contact-info h2 { font-size: clamp(1.5rem, 5vw, 2rem); }
+      .map-box { min-height: 220px; }
+
+      /* Footer */
+      .footer        { padding: 40px 16px 24px; }
+      .footer-bottom { flex-direction: column; text-align: center; gap: 8px; }
+      .footer-col h4 { margin-bottom: 12px; }
+
+      /* Form */
       .form-row   { grid-template-columns: 1fr; }
+      .form-group input,
+      .form-group select { padding: 14px 14px; font-size: 16px; /* prevent zoom on iOS */ }
+      .form-submit { padding: 16px; font-size: 1rem; }
+
+      /* FAQ */
+      .faq-q  { padding: 18px 18px; font-size: .95rem; }
+      .faq-a p{ padding: 0 18px 20px; }
     }
+
+    /* ════════════════════════════════════════════
+       RESPONSIVE — SMALL PHONE (≤480px)
+    ════════════════════════════════════════════ */
     @media (max-width: 480px) {
+      .container { padding: 0 14px; }
+
+      /* Hero full-width buttons */
       .hero-btns .btn { width: 100%; justify-content: center; }
+      .hero-scroll    { display: none; }
+
+      /* Trust 2×2 tighter */
+      .trust-grid  { gap: 8px; }
+      .trust-item  { padding: 10px 6px; }
+      .trust-num   { font-size: 1.75rem; }
+      .trust-lbl   { font-size: .75rem; }
+
+      /* About stats 3-col stays but shrinks */
+      .about-stats  { gap: 8px; }
+      .about-stat strong { font-size: 1.3rem; }
+      .about-stat span   { font-size: .7rem; }
+
+      /* Review quote decoration smaller */
+      .rev-quote { font-size: 3.5rem; }
+
+      /* Section titles */
+      .section-title { letter-spacing: -.3px; }
+
+      /* Floating buttons */
+      .wa-btn    { bottom: 18px; right: 14px; width: 52px; height: 52px; font-size: 1.45rem; }
+      .chat-fab  { bottom: 82px; right: 14px; height: 46px; font-size: .84rem; padding: 0 14px 0 12px; }
+      .chat-window { width: calc(100vw - 16px); right: 8px; bottom: 140px; }
+
+      /* Why cards */
+      .why-ico { width: 60px; height: 60px; font-size: 1.5rem; }
     }
   </style>
 </head>
