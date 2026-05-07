@@ -1812,6 +1812,77 @@
     d.setDate(d.getDate() + 1);
     dateInput.min = d.toISOString().split('T')[0];
   }
+
+  /* ── Chat Widget ── */
+  const CHAT_RESPONSES = {
+    cennik:  'Zapraszamy do kontaktu po szczegółowy cennik: 515 588 590 📞',
+    godziny: 'Pracujemy Pon–Pt 8:00–18:00, Sob 8:00–14:00. W niedzielę jesteśmy zamknięci. 🕐',
+    kontakt: 'Zadzwoń: 515 588 590 lub napisz przez formularz na stronie poniżej 👇',
+  };
+
+  let chatOpened = false;
+
+  function toggleChat() {
+    const win = document.getElementById('chatWindow');
+    win.classList.toggle('open');
+    if (!chatOpened && win.classList.contains('open')) {
+      chatOpened = true;
+      setTimeout(() => {
+        showTyping(() => addBotMsg('Cześć! Jestem asystentem warsztatu Spec Cars. W czym mogę pomóc? Możesz zapytać o cennik, usługi lub umówić wizytę. 🛠️'));
+      }, 500);
+    }
+  }
+
+  function addBotMsg(text) {
+    const msgs = document.getElementById('chatMsgs');
+    const m = document.createElement('div');
+    m.className = 'msg bot';
+    m.textContent = text;
+    msgs.appendChild(m);
+    msgs.scrollTop = msgs.scrollHeight;
+  }
+
+  function addUserMsg(text) {
+    const msgs = document.getElementById('chatMsgs');
+    const m = document.createElement('div');
+    m.className = 'msg user';
+    m.textContent = text;
+    msgs.appendChild(m);
+    msgs.scrollTop = msgs.scrollHeight;
+  }
+
+  function showTyping(cb) {
+    const msgs = document.getElementById('chatMsgs');
+    const t = document.createElement('div');
+    t.className = 'typing';
+    t.id = 'typingDots';
+    t.innerHTML = '<span></span><span></span><span></span>';
+    msgs.appendChild(t);
+    msgs.scrollTop = msgs.scrollHeight;
+    setTimeout(() => {
+      const el = document.getElementById('typingDots');
+      if (el) el.remove();
+      cb();
+    }, 1400);
+  }
+
+  function chatReply(type) {
+    const labels = { cennik: 'Cennik usług', wizyta: 'Umów wizytę', godziny: 'Godziny otwarcia', kontakt: 'Kontakt' };
+    addUserMsg(labels[type]);
+    document.querySelectorAll('.qbtn').forEach(b => b.disabled = true);
+    if (type === 'wizyta') {
+      showTyping(() => {
+        addBotMsg('Świetnie! Przewijam stronę do formularza rezerwacji 👇');
+        document.querySelectorAll('.qbtn').forEach(b => b.disabled = false);
+        setTimeout(() => document.getElementById('rezerwacja').scrollIntoView({ behavior: 'smooth' }), 700);
+      });
+    } else {
+      showTyping(() => {
+        addBotMsg(CHAT_RESPONSES[type]);
+        document.querySelectorAll('.qbtn').forEach(b => b.disabled = false);
+      });
+    }
+  }
 </script>
 </body>
 </html>
