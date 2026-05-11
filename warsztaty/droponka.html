@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DrOponka – Serwis Opon Gdańsk | Wymiana, Wyważanie, Przechowalnia</title>
+  <meta name="description" content="DrOponka Gdańsk – profesjonalny serwis opon. Wymiana sezonowa, wyważanie, przechowalnia, naprawa. Recepta na bezpieczną jazdę.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --y:  #FFD700;
+      --yd: #e6c200;
+      --p:  #2D1B3D;
+      --pm: #3d2550;
+      --pl: #4a2d60;
+      --w:  #ffffff;
+      --tl: rgba(255,255,255,.82);
+    }
+    *{margin:0;padding:0;box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{font-family:'Inter',sans-serif;background:#fff;color:#1a1a2e;overflow-x:hidden}
+
+    /* ── HEADER ── */
+    .hdr{position:fixed;top:0;left:0;right:0;z-index:1000;background:var(--p);border-bottom:2px solid var(--y);transition:box-shadow .3s}
+    .hdr.sc{box-shadow:0 4px 20px rgba(0,0,0,.35)}
+    .hi{max-width:1200px;margin:0 auto;padding:0 24px;height:68px;display:flex;align-items:center;justify-content:space-between}
+    .logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--y);font-weight:900;font-size:1.4rem}
+    .logo-rx{background:var(--y);color:var(--p);border-radius:7px;padding:3px 8px;font-size:.82rem;font-weight:900;letter-spacing:1px;font-style:italic}
+    nav.nav{display:flex;gap:4px;align-items:center}
+    nav.nav a{color:rgba(255,255,255,.78);text-decoration:none;padding:8px 13px;border-radius:8px;font-size:.88rem;font-weight:500;transition:all .2s}
+    nav.nav a:hover{color:var(--y);background:rgba(255,215,0,.1)}
+    .ncta{background:var(--y)!important;color:var(--p)!important;font-weight:700!important;padding:8px 18px!important}
+    .ncta:hover{background:var(--yd)!important}
+    .ham{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:8px}
+    .ham span{display:block;width:24px;height:2px;background:var(--y);border-radius:2px;transition:all .3s}
+    .mnav{display:none;flex-direction:column;background:var(--pm);border-top:1px solid rgba(255,215,0,.18);padding:8px 0}
+    .mnav.open{display:flex}
+    .mnav a{color:rgba(255,255,255,.85);text-decoration:none;padding:12px 24px;font-size:.92rem;font-weight:500}
+    .mnav a:hover{color:var(--y)}
+    .mnav .mc{color:var(--y);font-weight:700}
+
+    /* ── HERO ── */
+    .hero{min-height:100vh;background:linear-gradient(135deg,var(--p) 0%,#1a0d2e 60%,#0d0820 100%);display:flex;align-items:center;position:relative;overflow:hidden;padding-top:68px}
+    .hero::before{content:'';position:absolute;top:-180px;right:-180px;width:560px;height:560px;border-radius:50%;background:radial-gradient(circle,rgba(255,215,0,.13) 0%,transparent 70%);pointer-events:none}
+    .hero::after{content:'';position:absolute;bottom:-80px;left:-80px;width:380px;height:380px;border-radius:50%;background:radial-gradient(circle,rgba(255,215,0,.07) 0%,transparent 70%);pointer-events:none}
+    .htracks{position:absolute;inset:0;background-image:repeating-linear-gradient(90deg,transparent,transparent 40px,rgba(255,215,0,.025) 40px,rgba(255,215,0,.025) 42px);pointer-events:none}
+    .con{max-width:1200px;margin:0 auto;padding:0 24px;width:100%}
+    .hcon{position:relative;z-index:1;max-width:700px;padding:88px 0}
+    .hbadge{display:inline-flex;align-items:center;gap:8px;background:rgba(255,215,0,.13);border:1px solid rgba(255,215,0,.38);color:var(--y);padding:7px 16px;border-radius:100px;font-size:.75rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:24px}
+    .hero h1{font-size:clamp(2.4rem,5vw,4rem);font-weight:900;color:#fff;line-height:1.1;margin-bottom:20px;letter-spacing:-1px}
+    .hero h1 span{color:var(--y)}
+    .hsub{font-size:1.1rem;color:var(--tl);line-height:1.65;margin-bottom:20px;max-width:540px}
+    .hslogan{display:inline-flex;align-items:center;gap:8px;color:var(--y);font-weight:700;font-size:.98rem;margin-bottom:36px;font-style:italic}
+    .hbtns{display:flex;gap:14px;flex-wrap:wrap}
+    .btn{display:inline-flex;align-items:center;gap:8px;padding:14px 26px;border-radius:10px;font-weight:700;font-size:.92rem;text-decoration:none;cursor:pointer;border:none;transition:all .25s;font-family:inherit}
+    .bp{background:var(--y);color:var(--p)}
+    .bp:hover{background:var(--yd);transform:translateY(-2px);box-shadow:0 8px 24px rgba(255,215,0,.32)}
+    .bo{background:transparent;color:#fff;border:2px solid rgba(255,255,255,.38)}
+    .bo:hover{border-color:var(--y);color:var(--y)}
+
+    /* ── STATS ── */
+    .sbar{background:var(--y);padding:20px 0}
+    .si{max-width:1200px;margin:0 auto;padding:0 24px;display:grid;grid-template-columns:repeat(4,1fr)}
+    .stat{text-align:center;padding:8px 16px;border-right:1px solid rgba(45,27,61,.18)}
+    .stat:last-child{border-right:none}
+    .snum{font-size:1.8rem;font-weight:900;color:var(--p);line-height:1}
+    .slbl{font-size:.76rem;color:var(--p);font-weight:600;margin-top:4px;text-transform:uppercase;letter-spacing:.5px}
+
+    /* ── SECTIONS ── */
+    section{padding:80px 0}
+    .sh{text-align:center;margin-bottom:52px}
+    .ey{display:inline-block;font-size:.73rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:5px 15px;border-radius:100px;margin-bottom:14px}
+    .ey-dark{background:rgba(45,27,61,.08);color:var(--p);border:1px solid rgba(45,27,61,.18)}
+    .ey-gold{background:rgba(255,215,0,.14);color:var(--y);border:1px solid rgba(255,215,0,.3)}
+    .st{font-size:clamp(1.75rem,3.5vw,2.5rem);font-weight:800;color:var(--p);line-height:1.2;margin-bottom:14px;letter-spacing:-.5px}
+    .st.w{color:#fff}
+    .ss{font-size:.97rem;color:#666;max-width:560px;margin:0 auto;line-height:1.7}
+    .ss.w{color:rgba(255,255,255,.72)}
+
+    /* ── SERVICES ── */
+    #uslugi{background:#fafafa}
+    .sgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:22px}
+    .sc{background:#fff;border-radius:16px;padding:30px 22px;border:1px solid #eee;transition:all .3s;position:relative;overflow:hidden}
+    .sc::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--y);transform:scaleX(0);transition:transform .3s}
+    .sc:hover{transform:translateY(-5px);box-shadow:0 14px 36px rgba(45,27,61,.11);border-color:transparent}
+    .sc:hover::before{transform:scaleX(1)}
+    .sci{width:52px;height:52px;background:rgba(255,215,0,.12);border-radius:13px;display:flex;align-items:center;justify-content:center;margin-bottom:18px;font-size:1.3rem;color:var(--p);border:1px solid rgba(255,215,0,.28)}
+    .sct{font-size:1rem;font-weight:700;color:var(--p);margin-bottom:9px}
+    .scd{font-size:.85rem;color:#666;line-height:1.6}
+    .scp{margin-top:14px;font-size:.8rem;font-weight:600;color:var(--p);background:rgba(255,215,0,.14);padding:3px 10px;border-radius:6px;display:inline-block}
+
+    /* ── RECEPTA ── */
+    #recepta{background:linear-gradient(135deg,var(--p) 0%,#1a0d2e 100%);position:relative;overflow:hidden}
+    #recepta::before{content:'Rx';position:absolute;right:4%;top:50%;transform:translateY(-50%);font-size:17rem;font-weight:900;color:rgba(255,215,0,.04);pointer-events:none;font-style:italic}
+    .rgrid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+    .rtxt h2{font-size:clamp(1.75rem,3vw,2.4rem);font-weight:800;color:#fff;line-height:1.2;margin-bottom:18px}
+    .rtxt h2 span{color:var(--y)}
+    .rtxt p{color:rgba(255,255,255,.72);font-size:.97rem;line-height:1.7;margin-bottom:14px}
+    .rlist{list-style:none;margin-top:22px}
+    .rlist li{display:flex;align-items:flex-start;gap:12px;padding:10px 0;color:rgba(255,255,255,.83);font-size:.92rem;border-bottom:1px solid rgba(255,255,255,.08)}
+    .rlist li:last-child{border-bottom:none}
+    .rlist li i{color:var(--y);margin-top:3px;flex-shrink:0}
+    .rcard{background:rgba(255,215,0,.08);border:1px solid rgba(255,215,0,.22);border-radius:20px;padding:34px}
+    .rcard .rxs{font-size:2.8rem;font-weight:900;color:var(--y);font-style:italic;margin-bottom:14px;line-height:1}
+    .rcard h3{color:#fff;font-size:1.1rem;font-weight:700;margin-bottom:14px}
+    .rsteps{list-style:none;counter-reset:sc}
+    .rsteps li{counter-increment:sc;display:flex;align-items:flex-start;gap:13px;padding:11px 0;border-bottom:1px solid rgba(255,255,255,.07);color:rgba(255,255,255,.78);font-size:.88rem}
+    .rsteps li:last-child{border-bottom:none}
+    .rsteps li::before{content:counter(sc);flex-shrink:0;width:27px;height:27px;background:var(--y);color:var(--p);border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.8rem}
+
+    /* ── PRZECHOWALNIA ── */
+    #przechowalnia{background:#fff}
+    .pgrid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start}
+    .pfeats{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:28px}
+    .pfeat{background:#fafafa;border:1px solid #eee;border-radius:12px;padding:18px}
+    .pfeat i{color:var(--y);font-size:1.25rem;margin-bottom:9px;display:block}
+    .pfeat h4{font-size:.88rem;font-weight:700;color:var(--p);margin-bottom:5px}
+    .pfeat p{font-size:.8rem;color:#777;line-height:1.5}
+    .pcard{background:var(--p);border-radius:20px;padding:34px;color:#fff}
+    .pcard h3{font-size:1.15rem;font-weight:700;color:var(--y);margin-bottom:22px}
+    .prow{display:flex;justify-content:space-between;align-items:center;padding:13px 0;border-bottom:1px solid rgba(255,255,255,.1);font-size:.88rem}
+    .prow:last-of-type{border-bottom:none}
+    .prow span:first-child{color:rgba(255,255,255,.77)}
+    .prow span:last-child{font-weight:700;color:var(--y)}
+
+    /* ── REZERWACJA ── */
+    #rezerwacja{background:#fafafa}
+    .bwrap{max-width:660px;margin:0 auto;background:#fff;border-radius:20px;padding:46px;box-shadow:0 8px 40px rgba(45,27,61,.1);border:1px solid rgba(45,27,61,.07)}
+    .bwrap h3{font-size:1.35rem;font-weight:800;color:var(--p);margin-bottom:7px}
+    .bwrap>p{color:#777;font-size:.88rem;margin-bottom:30px}
+    .fgrid{display:grid;grid-template-columns:1fr 1fr;gap:15px}
+    .fg{display:flex;flex-direction:column;gap:5px}
+    .fg.full{grid-column:1/-1}
+    .fg label{font-size:.78rem;font-weight:700;color:var(--p);text-transform:uppercase;letter-spacing:.4px}
+    .fg input,.fg select,.fg textarea{padding:11px 15px;border:1.5px solid #e0e0e0;border-radius:9px;font-family:inherit;font-size:.88rem;color:#1a1a2e;background:#fff;transition:border-color .2s;outline:none}
+    .fg input:focus,.fg select:focus,.fg textarea:focus{border-color:var(--y);box-shadow:0 0 0 3px rgba(255,215,0,.14)}
+    .fg textarea{resize:vertical;min-height:90px}
+    .fsub{width:100%;padding:15px;background:var(--y);color:var(--p);border:none;border-radius:9px;font-weight:800;font-size:.97rem;cursor:pointer;transition:all .25s;margin-top:6px;font-family:inherit;display:flex;align-items:center;justify-content:center;gap:8px}
+    .fsub:hover{background:var(--yd);transform:translateY(-2px);box-shadow:0 8px 20px rgba(255,215,0,.32)}
+    .fnote{text-align:center;font-size:.78rem;color:#aaa;margin-top:10px}
+
+    /* ── KONTAKT ── */
+    #kontakt{background:var(--p)}
+    .cgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+    .ci{text-align:center;padding:30px 22px;background:rgba(255,255,255,.05);border-radius:15px;border:1px solid rgba(255,215,0,.14)}
+    .ci i{font-size:1.75rem;color:var(--y);margin-bottom:14px;display:block}
+    .ci h4{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:rgba(255,255,255,.45);margin-bottom:7px}
+    .ci a,.ci p{color:#fff;font-size:.92rem;font-weight:500;text-decoration:none;line-height:1.6}
+    .ci a:hover{color:var(--y)}
+
+    /* ── FOOTER ── */
+    footer{background:#1a0d2e;padding:28px 0;border-top:1px solid rgba(255,215,0,.14)}
+    .fi{max-width:1200px;margin:0 auto;padding:0 24px;display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap}
+    .flogo{color:var(--y);font-weight:900;font-size:1.05rem;text-decoration:none}
+    .fcp{color:rgba(255,255,255,.4);font-size:.79rem}
+
+    /* ── AI WIDGET ── */
+    .aiw{position:fixed;bottom:26px;right:26px;z-index:999}
+    .aipanel{position:absolute;bottom:74px;right:0;width:330px;background:#fff;border-radius:18px;box-shadow:0 18px 56px rgba(0,0,0,.17);border:1px solid #eee;display:none;flex-direction:column;overflow:hidden;max-height:490px}
+    .aipanel.open{display:flex}
+    .aihead{background:var(--p);padding:14px 18px;display:flex;align-items:center;gap:11px}
+    .aiav{width:36px;height:36px;border-radius:50%;background:var(--y);display:flex;align-items:center;justify-content:center;font-size:.9rem;color:var(--p);font-weight:900;font-style:italic;flex-shrink:0}
+    .aiht{flex:1}
+    .aiht strong{color:#fff;font-size:.87rem;display:block}
+    .aiht span{color:rgba(255,255,255,.55);font-size:.72rem}
+    .aic{color:rgba(255,255,255,.55);background:none;border:none;cursor:pointer;font-size:1rem;padding:4px}
+    .aimsg{flex:1;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:11px;max-height:280px}
+    .msg{max-width:86%;padding:9px 13px;border-radius:13px;font-size:.83rem;line-height:1.5}
+    .msg.bot{background:#f3f0f8;color:#1a1a2e;align-self:flex-start;border-bottom-left-radius:3px}
+    .msg.user{background:var(--p);color:#fff;align-self:flex-end;border-bottom-right-radius:3px}
+    .aiq{display:flex;flex-wrap:wrap;gap:5px;padding:8px 14px;border-top:1px solid #f0f0f0}
+    .aiq button{background:rgba(45,27,61,.06);border:1px solid rgba(45,27,61,.12);color:var(--p);border-radius:100px;padding:4px 11px;font-size:.72rem;font-weight:600;cursor:pointer;font-family:inherit;transition:all .2s}
+    .aiq button:hover{background:var(--y);border-color:var(--yd)}
+    .aiir{display:flex;gap:7px;padding:11px 14px;border-top:1px solid #f0f0f0}
+    .aiir input{flex:1;border:1.5px solid #e0e0e0;border-radius:9px;padding:9px 13px;font-size:.83rem;font-family:inherit;outline:none}
+    .aiir input:focus{border-color:var(--y)}
+    .aiir button{background:var(--y);color:var(--p);border:none;border-radius:9px;padding:9px 13px;cursor:pointer;font-size:.87rem;font-weight:700;font-family:inherit}
+    .aiir button:hover{background:var(--yd)}
+    .aitog{width:58px;height:58px;border-radius:50%;background:var(--y);color:var(--p);border:none;cursor:pointer;font-size:1.4rem;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 22px rgba(255,215,0,.42);transition:all .3s;position:relative}
+    .aitog:hover{transform:scale(1.08)}
+    .aipulse{position:absolute;top:1px;right:1px;width:15px;height:15px;background:#22c55e;border-radius:50%;border:2px solid #fff}
+
+    /* ── FADE ── */
+    .fi-el{opacity:0;transform:translateY(18px);transition:opacity .55s ease,transform .55s ease}
+    .fi-el.vis{opacity:1;transform:none}
+
+    /* ── RESPONSIVE ── */
+    @media(max-width:900px){
+      .rgrid,.pgrid{grid-template-columns:1fr;gap:30px}
+      .cgrid{grid-template-columns:1fr}
+      .si{grid-template-columns:repeat(2,1fr)}
+    }
+    @media(max-width:680px){
+      nav.nav{display:none}
+      .ham{display:flex}
+      .hcon{padding:60px 0}
+      .fgrid{grid-template-columns:1fr}
+      .bwrap{padding:26px 18px}
+      .pfeats{grid-template-columns:1fr}
+      .si{grid-template-columns:repeat(2,1fr)}
+      .aipanel{width:290px}
+    }
+    @media(max-width:440px){
+      .hbtns{flex-direction:column}
+      .hbtns .btn{justify-content:center}
+    }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="hdr" id="hdr">
+  <div class="hi">
+    <a href="#" class="logo">
+      <span class="logo-rx">Rx</span>DrOponka
+    </a>
+    <nav class="nav">
+      <a href="#uslugi">Usługi</a>
+      <a href="#przechowalnia">Przechowalnia</a>
+      <a href="#recepta">O nas</a>
+      <a href="#kontakt">Kontakt</a>
+      <a href="#rezerwacja" class="ncta">Umów wizytę</a>
+    </nav>
+    <button class="ham" id="ham" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <nav class="mnav" id="mnav">
+    <a href="#uslugi"       onclick="closeMob()">Usługi</a>
+    <a href="#przechowalnia" onclick="closeMob()">Przechowalnia</a>
+    <a href="#recepta"      onclick="closeMob()">O nas</a>
+    <a href="#kontakt"      onclick="closeMob()">Kontakt</a>
+    <a href="#rezerwacja"   onclick="closeMob()" class="mc">Umów wizytę →</a>
+  </nav>
+</header>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="htracks"></div>
+  <div class="con">
+    <div class="hcon fi-el">
+      <div class="hbadge">
+        <i class="fas fa-circle" style="font-size:.45rem;color:#22c55e"></i>
+        SERWIS OPON · GDAŃSK
+      </div>
+      <h1>DrOponka –<br><span>Ekspert od Opon</span><br>w Gdańsku</h1>
+      <p class="hsub">Wymiana sezonowa, wyważanie, przechowalnia i naprawa opon. Szybko, bez kolejek, z pełną obsługą.</p>
+      <div class="hslogan"><i class="fas fa-prescription"></i> „Recepta na bezpieczną jazdę"</div>
+      <div class="hbtns">
+        <a href="#rezerwacja" class="btn bp"><i class="fas fa-calendar-check"></i> Umów wymianę</a>
+        <a href="mailto:marcin@droponka.pl" class="btn bo"><i class="fas fa-envelope"></i> Napisz do nas</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="sbar">
+  <div class="si">
+    <div class="stat fi-el"><div class="snum">15+</div><div class="slbl">Lat na rynku</div></div>
+    <div class="stat fi-el"><div class="snum">5 000+</div><div class="slbl">Klientów</div></div>
+    <div class="stat fi-el"><div class="snum">500+</div><div class="slbl">Kół w przechowalni</div></div>
+    <div class="stat fi-el"><div class="snum">98%</div><div class="slbl">Zadowolonych</div></div>
+  </div>
+</div>
+
+<!-- USŁUGI -->
+<section id="uslugi">
+  <div class="con">
+    <div class="sh">
+      <span class="ey ey-dark">Nasze usługi</span>
+      <h2 class="st">Kompleksowy serwis opon w Gdańsku</h2>
+      <p class="ss">Wszystko pod jednym dachem — od wymiany sezonowej, przez przechowalnie, aż po nowe opony z doradztwem.</p>
+    </div>
+    <div class="sgrid">
+      <div class="sc fi-el">
+        <div class="sci"><i class="fas fa-sync-alt"></i></div>
+        <div class="sct">Wymiana Sezonowa</div>
+        <div class="scd">Sprawna wymiana opon letnich na zimowe i z powrotem. Rezerwacja online, brak kolejek.</div>
+        <span class="scp">od 80 zł / komplet</span>
+      </div>
+      <div class="sc fi-el">
+        <div class="sci"><i class="fas fa-circle-notch"></i></div>
+        <div class="sct">Wyważanie Kół</div>
+        <div class="scd">Precyzyjne wyważanie na nowoczesnym sprzęcie. Eliminuje drgania i przedłuża żywotność opon.</div>
+        <span class="scp">od 10 zł / koło</span>
+      </div>
+      <div class="sc fi-el">
+        <div class="sci"><i class="fas fa-warehouse"></i></div>
+        <div class="sct">Przechowalnia Opon</div>
+        <div class="scd">Klimatyzowany magazyn, ubezpieczenie, SMS przy odbiorze. Bezpieczne przechowanie poza sezonem.</div>
+        <span class="scp">od 150 zł / sezon</span>
+      </div>
+      <div class="sc fi-el">
+        <div class="sci"><i class="fas fa-tools"></i></div>
+        <div class="sct">Naprawa Opon</div>
+        <div class="scd">Wulkanizacja i naprawa przebić. Często w trybie ekspresowym — wyjeżdżasz w 30 minut.</div>
+        <span class="scp">od 25 zł / naprawa</span>
+      </div>
+      <div class="sc fi-el">
+        <div class="sci"><i class="fas fa-shopping-cart"></i></div>
+        <div class="sct">Sprzedaż Nowych Opon</div>
+        <div class="scd">Szeroki wybór marek premium i ekonomicznych. Doradzimy i zamontujemy od ręki.</div>
+        <span class="scp">Zapytaj o wycenę</span>
+      </div>
+      <div class="sc fi-el">
+        <div class="sci"><i class="fas fa-drafting-compass"></i></div>
+        <div class="sct">Geometria Kół 3D</div>
+        <div class="scd">Komputerowa regulacja zbieżności. Zmniejsza zużycie paliwa i wyrównuje ścieranie bieżnika.</div>
+        <span class="scp">od 120 zł</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RECEPTA -->
+<section id="recepta">
+  <div class="con">
+    <div class="rgrid">
+      <div class="rtxt fi-el">
+        <span class="ey ey-gold">Nasza filozofia</span>
+        <h2>„Recepta na<br><span>bezpieczną jazdę"</span></h2>
+        <p>Jak każda dobra recepta, bezpieczna jazda wymaga właściwych składników: sprawnych opon, prawidłowego ciśnienia i regularnych przeglądów.</p>
+        <p>DrOponka to nie tylko serwis — to partner, który dba o to, żebyś zawsze wyjeżdżał pewny swojego auta.</p>
+        <ul class="rlist">
+          <li><i class="fas fa-check-circle"></i> Diagnostyka stanu opon przy każdej wizycie bez dopłat</li>
+          <li><i class="fas fa-check-circle"></i> Uczciwa wycena — bez ukrytych kosztów</li>
+          <li><i class="fas fa-check-circle"></i> Nowoczesny sprzęt montażowo-wyważający</li>
+          <li><i class="fas fa-check-circle"></i> Powiadomienie SMS o zbliżającej się wymianie sezonu</li>
+        </ul>
+      </div>
+      <div class="rcard fi-el">
+        <div class="rxs">Rx</div>
+        <h3>Twoja recepta na bezpieczeństwo</h3>
+        <ol class="rsteps">
+          <li>Wymień opony na odpowiednie do sezonu</li>
+          <li>Sprawdź i wyreguluj ciśnienie w oponach</li>
+          <li>Wyważ koła po każdej wymianie</li>
+          <li>Przechowaj zimowe opony w bezpiecznym magazynie</li>
+          <li>Regularnie kontroluj głębokość bieżnika</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRZECHOWALNIA -->
+<section id="przechowalnia">
+  <div class="con">
+    <div class="sh">
+      <span class="ey ey-dark">Magazyn kół</span>
+      <h2 class="st">Przechowalnia Opon w Gdańsku</h2>
+      <p class="ss">Nie masz gdzie trzymać kół poza sezonem? Zostaw je nam — bezpieczny, klimatyzowany magazyn w Gdańsku.</p>
+    </div>
+    <div class="pgrid">
+      <div>
+        <p style="color:#555;line-height:1.75;margin-bottom:16px">Nasza przechowalnia to spokój ducha przez cały rok. Każdy komplet jest oznaczony, opisany i przechowywany w odpowiednich warunkach temperatury i wilgotności — tak jak producent opony zaleca.</p>
+        <p style="color:#555;line-height:1.75">Powiadomimy Cię SMS-em gdy nadejdzie czas wymiany. Odbiór w dowolnym momencie — wystarczy wcześniej się umówić.</p>
+        <div class="pfeats">
+          <div class="pfeat fi-el"><i class="fas fa-snowflake"></i><h4>Klimatyzacja</h4><p>Stała temperatura i wilgotność przez cały rok</p></div>
+          <div class="pfeat fi-el"><i class="fas fa-shield-alt"></i><h4>Ubezpieczenie</h4><p>Każdy komplet objęty ochroną ubezpieczeniową</p></div>
+          <div class="pfeat fi-el"><i class="fas fa-sms"></i><h4>Przypomnienia SMS</h4><p>Powiadomimy Cię gdy zbliży się sezon wymiany</p></div>
+          <div class="pfeat fi-el"><i class="fas fa-tag"></i><h4>Oznakowanie</h4><p>Etykieta z pozycją montażu na każdej oponie</p></div>
+        </div>
+      </div>
+      <div class="pcard fi-el">
+        <h3>Cennik przechowalni</h3>
+        <div class="prow"><span>Opony bez felg (4 szt.)</span><span>od 150 zł / sezon</span></div>
+        <div class="prow"><span>Koła z felgami (4 szt.)</span><span>od 200 zł / sezon</span></div>
+        <div class="prow"><span>Czas przechowywania</span><span>~6 miesięcy</span></div>
+        <div class="prow"><span>Odbiór w dowolnym dniu</span><span><i class="fas fa-check" style="color:var(--y)"></i> Tak</span></div>
+        <div class="prow"><span>Powiadomienie SMS</span><span><i class="fas fa-check" style="color:var(--y)"></i> Gratis</span></div>
+        <a href="#rezerwacja" class="btn bp" style="width:100%;justify-content:center;margin-top:20px;display:flex;text-decoration:none">
+          <i class="fas fa-warehouse"></i> Zarezerwuj miejsce
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REZERWACJA -->
+<section id="rezerwacja">
+  <div class="con">
+    <div class="sh">
+      <span class="ey ey-dark">Rezerwacja online</span>
+      <h2 class="st">Umów wizytę</h2>
+      <p class="ss">Wypełnij formularz, a odezwiemy się w ciągu kilku godzin, aby potwierdzić termin.</p>
+    </div>
+    <div class="bwrap">
+      <h3>Formularz rezerwacji</h3>
+      <p>Potwierdzimy termin SMS-em lub e-mailem w ciągu kilku godzin roboczych.</p>
+      <form id="bform">
+        <div class="fgrid">
+          <div class="fg"><label>Imię i nazwisko *</label><input type="text" name="name" placeholder="Jan Kowalski" required></div>
+          <div class="fg"><label>Telefon *</label><input type="tel" name="phone" placeholder="600 000 000" required></div>
+          <div class="fg"><label>E-mail</label><input type="email" name="email" placeholder="twoj@email.pl"></div>
+          <div class="fg"><label>Marka i model auta</label><input type="text" name="car" placeholder="np. VW Golf"></div>
+          <div class="fg full">
+            <label>Usługa *</label>
+            <select name="service" required>
+              <option value="">-- Wybierz usługę --</option>
+              <option>Wymiana sezonowa (lato → zima)</option>
+              <option>Wymiana sezonowa (zima → lato)</option>
+              <option>Wyważanie kół</option>
+              <option>Przechowalnia — złożenie opon</option>
+              <option>Przechowalnia — odbiór opon</option>
+              <option>Naprawa opony / wulkanizacja</option>
+              <option>Geometria kół 3D</option>
+              <option>Zakup nowych opon + montaż</option>
+            </select>
+          </div>
+          <div class="fg"><label>Preferowana data</label><input type="date" name="date"></div>
+          <div class="fg">
+            <label>Godzina</label>
+            <select name="time">
+              <option value="">-- Wybierz --</option>
+              <option>8:00</option><option>9:00</option><option>10:00</option>
+              <option>11:00</option><option>12:00</option><option>13:00</option>
+              <option>14:00</option><option>15:00</option><option>16:00</option><option>17:00</option>
+            </select>
+          </div>
+          <div class="fg full"><label>Uwagi (rozmiar opon, specjalne życzenia)</label><textarea name="notes" placeholder="np. 205/55 R16, felgi aluminiowe..."></textarea></div>
+        </div>
+        <button type="submit" class="fsub"><i class="fas fa-calendar-check"></i> Wyślij rezerwację</button>
+        <p class="fnote">Odpiszemy lub zadzwonimy w ciągu kilku godzin roboczych.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- KONTAKT -->
+<section id="kontakt">
+  <div class="con">
+    <div class="sh">
+      <span class="ey ey-gold">Znajdź nas</span>
+      <h2 class="st w">Kontakt i godziny</h2>
+      <p class="ss w">DrOponka Gdańsk — Marcin Wejtko i jego zespół do Twojej dyspozycji.</p>
+    </div>
+    <div class="cgrid">
+      <div class="ci fi-el"><i class="fas fa-envelope"></i><h4>E-mail</h4><a href="mailto:marcin@droponka.pl">marcin@droponka.pl</a></div>
+      <div class="ci fi-el"><i class="fas fa-map-marker-alt"></i><h4>Lokalizacja</h4><p>Gdańsk</p></div>
+      <div class="ci fi-el"><i class="fas fa-clock"></i><h4>Godziny</h4><p>Pon–Pt 8:00–18:00<br>Sob 8:00–14:00</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="fi">
+    <a href="#" class="flogo"><i style="font-style:italic">Rx</i> DrOponka Gdańsk</a>
+    <span class="fcp">© 2026 DrOponka · Recepta na bezpieczną jazdę</span>
+  </div>
+</footer>
+
+<!-- AI WIDGET -->
+<div class="aiw" id="aiw">
+  <div class="aipanel" id="aipanel">
+    <div class="aihead">
+      <div class="aiav">Rx</div>
+      <div class="aiht">
+        <strong>Asystent DrOponka</strong>
+        <span>🟢 Online — odpowie natychmiast</span>
+      </div>
+      <button class="aic" onclick="toggleAI()" aria-label="Zamknij"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="aimsg" id="aimsg">
+      <div class="msg bot">Hej! 👋 Jestem asystentem DrOponki w Gdańsku. Odpowiem na pytania o opony, cennik, przechowalnie i terminy wymiany. O co chcesz zapytać?</div>
+    </div>
+    <div class="aiq" id="aiq">
+      <button onclick="askAI('Ile kosztuje wymiana opon?')">Cennik wymiany</button>
+      <button onclick="askAI('Kiedy wymienić opony na zimowe?')">Kiedy na zimowe?</button>
+      <button onclick="askAI('Jak działa przechowalnia?')">Przechowalnia</button>
+      <button onclick="askAI('Jak umówić wizytę?')">Rezerwacja</button>
+    </div>
+    <div class="aiir">
+      <input type="text" id="aiinput" placeholder="Napisz pytanie..." onkeydown="if(event.key==='Enter')sendAI()">
+      <button onclick="sendAI()"><i class="fas fa-paper-plane"></i></button>
+    </div>
+  </div>
+  <button class="aitog" onclick="toggleAI()" aria-label="Asystent AI">
+    <i class="fas fa-comment-alt" id="aiico"></i>
+    <div class="aipulse"></div>
+  </button>
+</div>
+
+<script>
+// Header scroll
+const hdr = document.getElementById('hdr');
+window.addEventListener('scroll', () => hdr.classList.toggle('sc', scrollY > 60));
+
+// Mobile nav
+const ham = document.getElementById('ham');
+const mnav = document.getElementById('mnav');
+ham.addEventListener('click', () => mnav.classList.toggle('open'));
+function closeMob() { mnav.classList.remove('open'); }
+
+// Fade-in
+const obs = new IntersectionObserver(es => es.forEach(e => { if(e.isIntersecting) e.target.classList.add('vis'); }), { threshold: 0.1 });
+document.querySelectorAll('.fi-el').forEach(el => obs.observe(el));
+
+// Booking form
+document.getElementById('bform').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const btn = this.querySelector('.fsub');
+  btn.innerHTML = '<i class="fas fa-check"></i> Wysłano! Odezwiemy się wkrótce.';
+  btn.style.background = '#22c55e';
+  btn.style.color = '#fff';
+  btn.disabled = true;
+});
+
+// AI knowledge base
+const kb = {
+  'wymiana':      'Wymiana sezonowa kompletu 4 kół kosztuje od 80 zł (demontaż + montaż + wyważanie). Zadzwoń lub umów się przez formularz — często przyjmujemy tego samego dnia 😊',
+  'cennik':       'Cennik DrOponka:\n• Wymiana sezonowa: od 80 zł / komplet\n• Wyważanie: od 10 zł / koło\n• Naprawa przebicia: od 25 zł\n• Przechowalnia: od 150 zł / sezon\n• Geometria 3D: od 120 zł\nPo szczegółową wycenę napisz na marcin@droponka.pl',
+  'cen':          'Wymiana sezonowa od 80 zł, wyważanie od 10 zł/koło, naprawa od 25 zł, przechowalnia od 150 zł/sezon. Napisz na marcin@droponka.pl po dokładną wycenę!',
+  'ile':          'Wymiana sezonowa od 80 zł, wyważanie od 10 zł/koło, naprawa od 25 zł, przechowalnia od 150 zł/sezon. Napisz na marcin@droponka.pl po dokładną wycenę!',
+  'zimow':        'Opony zimowe zakładamy gdy temperatura regularnie spada poniżej 7°C — zazwyczaj od połowy października. Nie czekaj do pierwszego śniegu! Możemy przypomnieć Ci SMS-em 📱',
+  'letni':        'Opony letnie zakładamy wiosną, gdy temperatura utrzymuje się powyżej 7°C — zwykle od marca/kwietnia. Zadzwoń lub umów się przez formularz.',
+  'sezon':        'Zimowe opony zakładamy od połowy października (poniżej 7°C), letnie — od marca/kwietnia. Możemy wysyłać Ci przypomnienia SMS przed każdą wymianą sezonu!',
+  'przechowalnia':'Przechowalnia kosztuje od 150 zł/sezon (opony bez felg) lub 200 zł/sezon (z felgami). Klimatyzowany magazyn, ubezpieczenie, oznakowanie kół i powiadomienie SMS gdy przyjdzie czas odbioru 📦',
+  'magazyn':      'Nasza przechowalnia to od 150 zł za sezon (~6 miesięcy). Koła są ubezpieczone, opisane i trzymane w odpowiednich warunkach. SMS-em powiadomimy o zbliżającym się sezonie wymiany.',
+  'termin':       'Możesz zarezerwować wizytę przez formularz na tej stronie — wybierz usługę i datę, a potwierdzimy SMS-em lub mailem w ciągu kilku godzin. Można też napisać na marcin@droponka.pl 📅',
+  'rezerwacja':   'Rezerwacja jest prosta — przewiń do sekcji "Umów wizytę", wypełnij formularz i gotowe. Możesz też napisać bezpośrednio do Marcina: marcin@droponka.pl',
+  'naprawa':      'Naprawa przebicia od 25 zł, często robimy ekspresowo w ~30 minut. Wulkanizacja na miejscu, zazwyczaj bez konieczności długiego czekania.',
+  'wyważ':        'Wyważanie kół od 10 zł/koło (40 zł za komplet). Zalecamy po każdej wymianie sezonowej — eliminuje drgania kierownicy i wydłuża życie opon.',
+  'geometria':    'Geometria kół 3D od 120 zł. Warto robić raz w roku lub po uderzeniu w krawężnik — zmniejsza zużycie paliwa i wyrównuje ścieranie bieżnika.',
+  'nowe':         'Sprzedajemy opony wielu marek — premium (Michelin, Goodyear, Continental) i ekonomiczne. Powiedz rozmiar i cel, a dobierzemy najlepszą opcję dla Twojego budżetu.',
+  'kontakt':      'Kontakt: marcin@droponka.pl — Marcin Wejtko, Co-Founder DrOponka. Działamy w Gdańsku, Pon–Pt 8–18, Sob 8–14. Możesz też skorzystać z formularza rezerwacji.',
+};
+
+function toggleAI() {
+  const p = document.getElementById('aipanel');
+  const i = document.getElementById('aiico');
+  p.classList.toggle('open');
+  i.className = p.classList.contains('open') ? 'fas fa-times' : 'fas fa-comment-alt';
+}
+
+function askAI(q) {
+  document.getElementById('aiq').style.display = 'none';
+  addMsg(q, 'user');
+  setTimeout(() => addMsg(getReply(q), 'bot'), 620);
+}
+
+function sendAI() {
+  const inp = document.getElementById('aiinput');
+  const q = inp.value.trim();
+  if (!q) return;
+  inp.value = '';
+  document.getElementById('aiq').style.display = 'none';
+  addMsg(q, 'user');
+  setTimeout(() => addMsg(getReply(q), 'bot'), 700);
+}
+
+function addMsg(text, type) {
+  const box = document.getElementById('aimsg');
+  const d = document.createElement('div');
+  d.className = 'msg ' + type;
+  d.textContent = text;
+  box.appendChild(d);
+  box.scrollTop = box.scrollHeight;
+}
+
+function getReply(q) {
+  const l = q.toLowerCase();
+  for (const [k, v] of Object.entries(kb)) {
+    if (l.includes(k)) return v;
+  }
+  return 'Dziękuję za pytanie! Napisz bezpośrednio do Marcina: marcin@droponka.pl lub skorzystaj z formularza rezerwacji na tej stronie. Odezwiemy się szybko! 😊';
+}
+</script>
+</body>
+</html>
